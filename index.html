@@ -587,7 +587,7 @@
         }
 
         // Diese Funktion aktualisiert die Dropdowns für Monate.
-        function updateMonthDropdown() {
+        MonthDropdown() {
                const monthDropdown = document.getElementById('monthDropdown');
             monthDropdown.innerHTML = '';
             for (let month = 0; month < 12; month++) {
@@ -628,7 +628,7 @@
         }
 
         // Diese Funktion aktualisiert die Headerbuttons für Woche, Monat und Jahr.
-        function updateHeaderButtons() {
+        HeaderButtons() {
             const startOfWeek = getStartOfWeek(currentDate); // Ermittle den Start der Woche.
             const endOfWeek = new Date(startOfWeek); // Ende Woche festlegen
             endOfWeek.setDate(endOfWeek.getDate() + 4);
@@ -786,7 +786,7 @@
             const department = document.getElementById('department').value;
             const type = document.getElementById('type').value;
             const startTime = document.getElementById('startTime').value;
-            const endTime = document.getElementById('endTime').value;
+            const endTime = conflict.startTime; // Setze auf die nächste verfügbare Zeit
             const email = document.getElementById('email').value;
             const participants = document.getElementById('participants').value; // Teilnehmerzahl hinzufügen
 
@@ -808,6 +808,7 @@
 
                 saveBooking(bookingData); // Speichern der Buchung
                 showBookingConfirmation(bookingData); // Zeigt die Buchungsdetails in der Bestätigung an
+                updateCalendarCell(selectedCell, bookingData);
 
                 const timeSlots = getTimeSlots(startTime, endTime); // Zeitintervalle ermitteln
                 timeSlots.forEach(slot => {
@@ -831,7 +832,7 @@
         }
 
         // Diese Funktion aktualisiert die Buchung.
-        function updateBooking(updatedBooking) {
+        Booking(updatedBooking) {
             const room = updatedBooking.room; // Raum-ID
             let bookings = JSON.parse(localStorage.getItem(`bookings_room_${room}`)) || [];
             bookings = bookings.map(b => b.id === updatedBooking.id ? updatedBooking : b); // Aktualisiere die Buchung
@@ -1047,7 +1048,7 @@
         });
 
         // Diese Funktion aktualisiert die Rauminformationen.
-        function updateRoomDetails() {
+        RoomDetails() {
             const roomSelect = document.getElementById('roomSelect');
             const maxParticipantsElement = document.getElementById('maxParticipants');
             const selectedRoom = roomSelect.value;
